@@ -1,0 +1,76 @@
+<mat-toolbar class="app-toolbar no-print mat-toolbar mat-primary mat-toolbar-multiple-rows">
+  <button mat-button (click)="sidenav.toggle()" style="width: 64px; height: 64px; margin: 0 8px 0 0;">三</button>  
+  <span>My Application</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container mat-drawer-transition">
+  <mat-sidenav #sidenav mode="side" class="sidenav" opened>
+    <mat-nav-list>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+
+  <mat-sidenav-content>  
+    <section class="sidenav-content" role="content" id="docs">
+      <h3>内容214</h3>
+      
+      <!--
+      <button (click)="getHeroes()">获取英雄</button>
+      <table>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hero of heroes">
+            <td>{{hero.id}}</td>
+            <td>{{hero.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+      -->
+      <app-organization></app-organization>
+
+    </section>
+  </mat-sidenav-content>
+  
+</mat-sidenav-container>
+
+<footer class="no-print">
+    <p> Powered by Worsoft ©2010-2018. 代码授权方式：
+      <a href="license" title="License text">MIT-style License</a>
+      . 文档授权方式：
+      <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+      . 
+    </p>
+</footer>
+

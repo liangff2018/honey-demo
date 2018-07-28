@@ -1,0 +1,113 @@
+<nz-modal [(nzVisible)]="isVisible" nzWidth="70%" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  
+  <form nz-form [nzLayout]="'inline'" #orgForm="ngForm" (ngSubmit)="submitForm()">
+    <div nz-row>
+
+      <div nz-col [nzSpan]="24">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzSm]="3" nzFor="parent">上级组织</nz-form-label>
+          <nz-form-control [nzSm]="19">
+            <input [(ngModel)]="org.parent" name="parent" nz-input id="parent" disabled="true">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzSm]="6" nzFor="iptname">名称</nz-form-label>
+          <nz-form-control [nzSm]="14">
+            <input nz-input [(ngModel)]="org.name" name="name" placeholder="name" id="iptname" #name="ngModel" required>
+            <nz-form-explain *ngIf="name.dirty && name.errors">请输入名称!</nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzSm]="6" nzFor="code">编码</nz-form-label>
+          <nz-form-control [nzSm]="14">
+            <input nz-input [(ngModel)]="org.code" name="code" placeholder="编码" id="code" #code="ngModel" required>
+            <nz-form-explain *ngIf="code.dirty && code.errors">Please input your Password!</nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzSm]="6" nzFor="orgKindId">类型</nz-form-label>
+          <nz-form-control [nzSm]="14">
+            <nz-select [(ngModel)]="org.orgKindId" name="orgKindId" id="orgKindId" nzDisabled>
+              <nz-option nzValue="ogn" nzLabel="机构"></nz-option>
+              <nz-option nzValue="dpt" nzLabel="部门"></nz-option>
+              <nz-option nzValue="pos" nzLabel="岗位"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzSm]="6" nzFor="level">级别</nz-form-label>
+          <nz-form-control [nzSm]="14">
+            <nz-select [(ngModel)]="org.level" name="level" id="level" nzAllowClear>
+              <nz-option *ngFor="let opt of levelOptions" nzValue="{{opt.id}}" nzLabel="{{opt.name}}"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzSm]="6" nzFor="phone">电话</nz-form-label>
+          <nz-form-control [nzSm]="14">
+            <input [(ngModel)]="org.phone" name="phone" nz-input id="phone">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzSm]="6" nzFor="fax">传真</nz-form-label>
+          <nz-form-control [nzSm]="14">
+            <input [(ngModel)]="org.fax" name="fax" nz-input id="fax">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzSm]="6" nzFor="longName">全称</nz-form-label>
+          <nz-form-control [nzSm]="14">
+            <input [(ngModel)]="org.longName" name="longName" nz-input id="longName" dynamicRequired [isRequired]="flag">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzSm]="6" nzFor="zip">邮编</nz-form-label>
+          <nz-form-control [nzSm]="14">
+            <input [(ngModel)]="org.zip" name="zip" nz-input id="zip">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+
+      <div nz-col [nzSpan]="24">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzSm]="3" nzFor="address">地址</nz-form-label>
+          <nz-form-control [nzSm]="19">
+            <input [(ngModel)]="org.address" name="address" nz-input id="address">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+    </div>
+
+    <p>{{org | json}}</p>
+  </form>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+</nz-modal>
