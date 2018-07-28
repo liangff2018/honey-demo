@@ -13,6 +13,7 @@ export class HeroService {
 
 
   getHeroes(): Observable<Hero[]> {
+    //
     return this.http.get<Hero[]>("/organization/findAll.do");
   }
 }
