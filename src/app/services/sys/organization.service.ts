@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Organization } from '../../pojo/sys/Organization';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,9 +8,39 @@ import { Observable } from 'rxjs';
 })
 export class OrganizationService {
 
+  openEvent: EventEmitter<any> = new EventEmitter();
+
+  orgKind = {
+    ogn: "机构",
+    dpt: "部门",
+    pos: "岗位",
+    psm: "岗位成员"
+  }
+
   constructor(private http: HttpClient) { }
 
   getOrganizations(): Observable<Organization[]> {
     return this.http.get<Organization[]>("/organization/findAll.do");
   }
+
+  search(entity, pageIndex, pageSize, sortKey, sortValue): Observable<any> {
+    return this.http.post<Organization[]>("/organization/search.do?pageIndex="+pageIndex+"&pageSize="+pageSize+"&sortKey="+sortKey+"&sortValue="+sortKey, entity);
+  }
+
+  addOrganization(organization: Organization): Observable<Organization>{
+    return this.http.post<Organization>("/organization/add.do", organization);
+  }
+
+  updateOrganization(organization: Organization): Observable<Organization>{
+    return this.http.post<Organization>("/organization/update.do", organization);
+  }
+
+  delete(id: number): Observable<Organization>{
+    return this.http.delete<Organization>("/organization/delete.do?id="+id);
+  }
+
+  findOne(id: number): Observable<Organization>{
+    return this.http.get<Organization>("/organization/findById.do?id="+id);
+  }
+
 }
