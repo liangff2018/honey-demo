@@ -48,25 +48,18 @@ export class OrganizationComponent implements OnInit {
   }
 
   reveice(options: any): void{
-    debugger
-    if (options.type == "new") {
-      //this.orgs.push(options.data);
+    if (options.openMode == "new") {
       this.orgs = [... this.orgs, options.data];
     }
   }
 
-  addOgn() {
-    this.orgService.openEvent.emit({type: "new", data: {
-      parent: "0",
-      parentName: "",
-      orgKindId: "ogn",
-      orgKindName: "机构"
-    }});
+  addOgn(orgKindId: string) {
+    this.orgService.openEvent.emit({openMode: "new", orgKindId: orgKindId, parentId:0});
   }
 
-  editOrg(editEntity : any): void {
-    editEntity.parentName = "没有父节点";
-    this.orgService.openEvent.emit({type: "edit", data: editEntity});
+  editOrg(id : number): void {
+    this.orgService.openEvent.emit({openMode: "edit", orgId: id});
+    
   }
 
 

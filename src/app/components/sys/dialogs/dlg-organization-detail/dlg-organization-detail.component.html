@@ -42,9 +42,10 @@
       <div nz-col [nzSpan]="12">
         <nz-form-item nzFlex>
           <nz-form-label [nzSm]="6">级别</nz-form-label>
-          <nz-form-control [nzSm]="14">
+          <nz-form-control [nzSm]="14"> 
+            <!-- 使用说明：必须使用[nzValue]="opt.id"的方式，设置了level的值时，才会正确回显 -->
             <nz-select formControlName="level" nzAllowClear>
-              <nz-option *ngFor="let opt of levelOptions" nzValue="{{opt.id}}" nzLabel="{{opt.name}}"></nz-option>
+              <nz-option *ngFor="let opt of levelOptions" [nzValue]="opt.id" [nzLabel]="opt.name"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>

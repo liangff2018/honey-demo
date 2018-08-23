@@ -1,9 +1,9 @@
 
 <app-dlg-organization-detail (onReceiveResult)="reveice($event)"></app-dlg-organization-detail>
 
-<button nz-button nzType="primary" (click)="addOgn()">新建机构</button>
-<button nz-button nzType="primary">新建部门</button>
-<button nz-button nzType="primary">新建岗位</button>
+<button nz-button nzType="primary" (click)="addOgn('ogn')">新建机构</button>
+<button nz-button nzType="primary" (click)="addOgn('dpt')">新建部门</button>
+<button nz-button nzType="primary" (click)="addOgn('pos')">新建岗位</button>
 <button nz-button nzType="primary">新建人员</button>
 <button nz-button nzType="primary">分配人员</button>
 
@@ -31,7 +31,7 @@
             <td>{{org.code}}</td>
             <td>{{org.fullName}}</td>
             <td>
-                <a (click)="editOrg(org)">编辑</a>
+                <a (click)="editOrg(org.id)">编辑</a>
             </td>
         </tr>
     </tbody>

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class OrganizationService {
 
-  openEvent: EventEmitter<any> = new EventEmitter();
+  openEvent: EventEmitter<{openMode: string, orgKindId?: string, parentId?: number, orgId?: number}> = new EventEmitter();
 
   orgKind = {
     ogn: "机构",
