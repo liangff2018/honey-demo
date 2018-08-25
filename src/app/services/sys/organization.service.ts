@@ -43,4 +43,8 @@ export class OrganizationService {
     return this.http.get<Organization>("/organization/findById.do?id="+id);
   }
 
+  findChildren(parent: string): Observable<Organization[]> {
+    return this.http.get<Organization[]>("/organization/findChildren.do?parent="+parent);
+  }
+
 }

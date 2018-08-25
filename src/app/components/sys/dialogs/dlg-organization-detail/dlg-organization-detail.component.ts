@@ -3,6 +3,7 @@ import { Organization } from '../../../../pojo/sys/Organization';
 import { stringify } from 'querystring';
 import { FormBuilder, Validators } from '@angular/forms';
 import { OrganizationService } from '../../../../services/sys/organization.service';
+import { ok } from 'assert';
 
 @Component({
   selector: 'app-dlg-organization-detail',
@@ -84,8 +85,9 @@ export class DlgOrganizationDetailComponent implements OnInit {
   }
 
   handleOk(): void {
-    this.submitForm();
-    this.isVisible = false;
+    if (this.submitForm()) {
+      this.isVisible = false;
+    }
   }
 
   handleCancel(): void {
@@ -93,13 +95,13 @@ export class DlgOrganizationDetailComponent implements OnInit {
   }
 
 
-  submitForm(): void {
+  submitForm(): boolean {
     if (!this.formModel.valid) {
       for (const i in this.formModel.controls) {
         this.formModel.controls[i].markAsDirty();
         this.formModel.controls[i].updateValueAndValidity();
       }
-      return;
+      return false;
     }
 
     let formValue =  this.formModel.value;
@@ -121,7 +123,7 @@ export class DlgOrganizationDetailComponent implements OnInit {
         err => alert(err)
       );
     }
-  
+    return true;
   }
 
   addOrganization(): void {}
