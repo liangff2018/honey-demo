@@ -2,7 +2,7 @@
 </app-dlg-organization-detail>
 
 
-<nz-tree #nzTreeOrg [(ngModel)]="treeOrgs" [nzAsyncData]="true" (nzExpandChange)="explandAction($event)">
+<nz-tree #nzTreeOrg [(ngModel)]="treeOrgs" [nzAsyncData]="true" (nzExpandChange)="explandAction($event)" (nzClick)="clickAction($event)">
 </nz-tree>
 
 <button nz-button nzType="primary" (click)="addOrg('ogn')">新建机构</button>
