@@ -33,15 +33,14 @@ export class OrganizationComponent implements OnInit {
     //this.searchData();
   }
 
-  loadTreeOrgs(): void {
-    this.orgService.findChildren("0").subscribe(orgs => {
+  loadTreeOrgs(parent: number = 0): void {
+    this.orgService.findChildren(parent+"").subscribe(orgs => {
       for (let i = 0; i < orgs.length; i++) {
         let temp = { title: orgs[i].name, key: orgs[i].id + "", org: orgs[i] };
         if (i == 0) {
           temp["selected"] = true;
           //添加列表的数据
           this.entity.parent = orgs[i].id;
-          console.log("id=========="+orgs[i].id);
           this.searchData();
         }
         if (orgs[i].nodeKind == null) {
@@ -87,7 +86,7 @@ export class OrganizationComponent implements OnInit {
   }
 
   explandAction(e: NzFormatEmitEvent): void {
-    if (!e.node.isExpanded) {
+    if (!e.node.isExpanded || e.node.children.length > 0) {
       return;
     }
     this.orgService.findChildren(e.node.key).subscribe(orgs => {
