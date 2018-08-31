@@ -1,34 +1,68 @@
 <app-dlg-organization-detail (onReceiveResult)="reveice($event)">
 </app-dlg-organization-detail>
 
-
-<nz-tree #nzTreeOrg [(ngModel)]="treeOrgs" [nzAsyncData]="true" (nzExpandChange)="explandAction($event)" (nzClick)="clickAction($event)">
-</nz-tree>
-
-<button nz-button nzType="primary" (click)="addOrg('ogn')">新建机构</button>
-<button nz-button nzType="primary" (click)="addOrg('dpt')">新建部门</button>
-<button nz-button nzType="primary" (click)="addOrg('pos')">新建岗位</button>
-<button nz-button nzType="primary">新建人员</button>
-<button nz-button nzType="primary">分配人员</button>
-
-<nz-table #basicTable [nzData]="orgs" [nzFrontPagination]="tbConfig.frontPagination" [nzLoading]="tbConfig.loading" [nzTotal]="tbConfig.total"
-    [(nzPageIndex)]="tbConfig.pageIndex" [(nzPageSize)]="tbConfig.pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)">
-    <thead>
-        <tr>
-            <th>名称</th>
-            <th>编码</th>
-            <th>全路径名</th>
-            <th>操作</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let org of basicTable.data">
-            <td>{{org.name}}</td>
-            <td>{{org.code}}</td>
-            <td>{{org.fullName}}</td>
-            <td>
-                <a (click)="editOrg(org.id)">编辑</a>
-            </td>
-        </tr>
-    </tbody>
-</nz-table>
+<nz-layout>
+    <nz-sider>
+        <nz-tree #nzTreeOrg [(ngModel)]="treeOrgs" [nzAsyncData]="true" 
+            (nzExpandChange)="explandAction($event)" (nzClick)="clickAction($event)">
+            <ng-template #nzTreeTemplate let-node>
+                <span class="ant-tree-node-content-wrapper ng-tns-c16-5 ng-star-inserted" [class.ant-tree-node-selected]="node.isSelected">
+                    <span>
+                        <img src="../../../../assets/images/org/orgkind/ogn.gif" *ngIf="node.origin.org.orgKindId == 'ogn'">
+                        <img src="../../../../assets/images/org/orgkind/dpt.gif" *ngIf="node.origin.org.orgKindId == 'dpt'">
+                        <img src="../../../../assets/images/org/orgkind/pos.gif" *ngIf="node.origin.org.orgKindId == 'pos'"> {{node.title}}
+                    </span>
+                </span>
+            </ng-template>
+        </nz-tree>
+    </nz-sider>
+    <nz-layout>
+        <nz-header>
+            
+            <nz-dropdown>
+                <button nz-button nz-dropdown nzType="primary"><img src="../../../../assets/images/org/group.gif">新建组织</button>
+                <ul nz-menu>
+                    <li nz-menu-item (click)="addOrg('ogn')">
+                        <a><img src="../../../../assets/images/org/orgkind/ogn.gif"><span>新建机构</span></a>
+                    </li>
+                    <li nz-menu-item (click)="addOrg('dpt')">
+                        <a><img src="../../../../assets/images/org/orgkind/dpt.gif"><span>新建部门</span></a>
+                    </li>
+                    <li nz-menu-item (click)="addOrg('pos')">
+                        <a><img src="../../../../assets/images/org/orgkind/pos.gif">新建岗位</a>
+                    </li>
+                    <li nz-menu-item (click)="addOrg('pos')">
+                        <a><img src="../../../../assets/images/org/orgkind/psm.gif">新建人员</a>
+                    </li>
+                    <li nz-menu-divider></li>
+                    <li nz-menu-item (click)="addOrg('pos')">
+                        <a><img src="../../../../assets/images/org/orgkind/psn-gray.gif">分配下级人员</a>
+                    </li>
+                </ul>
+            </nz-dropdown>
+        </nz-header>
+        <nz-content>
+            <nz-table #basicTable [nzData]="orgs" [nzFrontPagination]="tbConfig.frontPagination" [nzLoading]="tbConfig.loading" [nzTotal]="tbConfig.total"
+                [(nzPageIndex)]="tbConfig.pageIndex" [(nzPageSize)]="tbConfig.pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>编码</th>
+                        <th>全路径名</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let org of basicTable.data">
+                        <td>{{org.name}}</td>
+                        <td>{{org.code}}</td>
+                        <td>{{org.fullName}}</td>
+                        <td>
+                            <a (click)="editOrg(org.id)">编辑</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-content>
+    </nz-layout>
+</nz-layout>

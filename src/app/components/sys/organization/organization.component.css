@@ -2,3 +2,23 @@
     margin-right: 8px;
     margin-bottom: 12px;
 }
+
+nz-layout{
+    height: 100%;
+}
+
+nz-layout > nz-sider, nz-header, nz-content {
+    background: #fff;
+}
+
+.ant-layout-header {
+    padding: 0 5px;
+}
+
+img {
+    padding-right: 0.6em;
+}
+
+:host ::ng-deep .ant-tree li .ant-tree-node-content-wrapper.ant-tree-node-selected {
+    width: calc(100% - 28px);
+}
