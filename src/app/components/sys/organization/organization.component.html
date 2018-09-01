@@ -6,7 +6,7 @@
         <nz-tree #nzTreeOrg [(ngModel)]="treeOrgs" [nzAsyncData]="true" 
             (nzExpandChange)="explandAction($event)" (nzClick)="clickAction($event)">
             <ng-template #nzTreeTemplate let-node>
-                <span class="ant-tree-node-content-wrapper ng-tns-c16-5 ng-star-inserted" [class.ant-tree-node-selected]="node.isSelected">
+                <span class="ant-tree-node-content-wrapper ng-tns-c16-4 ng-star-inserted" [class.ant-tree-node-selected]="node.isSelected">
                     <span>
                         <img src="../../../../assets/images/org/orgkind/ogn.gif" *ngIf="node.origin.org.orgKindId == 'ogn'">
                         <img src="../../../../assets/images/org/orgkind/dpt.gif" *ngIf="node.origin.org.orgKindId == 'dpt'">
@@ -22,21 +22,21 @@
             <nz-dropdown>
                 <button nz-button nz-dropdown nzType="primary"><img src="../../../../assets/images/org/group.gif">新建组织</button>
                 <ul nz-menu>
-                    <li nz-menu-item (click)="addOrg('ogn')">
-                        <a><img src="../../../../assets/images/org/orgkind/ogn.gif"><span>新建机构</span></a>
+                    <li nz-menu-item [nzDisabled]="!checkOrgEnable('ogn')" (click)="addOrg('ogn')">
+                        <img src="../../../../assets/images/org/orgkind/ogn{{!checkOrgEnable('ogn') ? '-gray' : ''}}.gif">新建机构
                     </li>
-                    <li nz-menu-item (click)="addOrg('dpt')">
-                        <a><img src="../../../../assets/images/org/orgkind/dpt.gif"><span>新建部门</span></a>
+                    <li nz-menu-item [nzDisabled]="!checkOrgEnable('dpt')" (click)="addOrg('dpt')">
+                        <img src="../../../../assets/images/org/orgkind/dpt{{!checkOrgEnable('dpt') ? '-gray' : ''}}.gif">新建部门
+                    </li>
+                    <li nz-menu-item [nzDisabled]="!checkOrgEnable('pos')" (click)="addOrg('pos')">
+                        <img src="../../../../assets/images/org/orgkind/pos{{!checkOrgEnable('pos') ? '-gray' : ''}}.gif">新建岗位
                     </li>
                     <li nz-menu-item (click)="addOrg('pos')">
-                        <a><img src="../../../../assets/images/org/orgkind/pos.gif">新建岗位</a>
-                    </li>
-                    <li nz-menu-item (click)="addOrg('pos')">
-                        <a><img src="../../../../assets/images/org/orgkind/psm.gif">新建人员</a>
+                        <img src="../../../../assets/images/org/orgkind/psm.gif">新建人员
                     </li>
                     <li nz-menu-divider></li>
-                    <li nz-menu-item (click)="addOrg('pos')">
-                        <a><img src="../../../../assets/images/org/orgkind/psn-gray.gif">分配下级人员</a>
+                    <li nz-menu-item (click)="addOrg('psn')">
+                        <img src="../../../../assets/images/org/orgkind/psm.gif">分配下级人员
                     </li>
                 </ul>
             </nz-dropdown>

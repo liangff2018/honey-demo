@@ -47,4 +47,11 @@ export class OrganizationService {
     return this.http.get<Organization[]>("/organization/findChildren.do?parent="+parent);
   }
 
+  checkNameRepeat(parent: number, name: string): Observable<boolean> {
+    return this.http.get<boolean>("/organization/checkNameRepeat.do?parent="+parent+"&name="+name);
+  }
+
+  checkCodeRepeat(parent: number, code: string): Observable<boolean> {
+    return this.http.get<boolean>("/organization/checkCodeRepeat.do?parent="+parent+"&code="+code);
+  }
 }

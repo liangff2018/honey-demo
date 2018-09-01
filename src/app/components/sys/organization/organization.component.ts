@@ -19,7 +19,8 @@ export class OrganizationComponent implements OnInit {
     loading: false,   //页面是否加载中
   };
 
-  entity: Organization = new Organization();;
+  entity: Organization = new Organization();
+  parentEntity: Organization;
 
   treeOrgs: NzTreeNode[] = [];
   orgs: Organization[];
@@ -41,6 +42,7 @@ export class OrganizationComponent implements OnInit {
           temp["selected"] = true;
           //添加列表的数据
           this.entity.parent = orgs[i].id;
+          this.parentEntity = orgs[i];
           this.searchData();
         }
         if (orgs[i].nodeKind == null) {
@@ -77,6 +79,9 @@ export class OrganizationComponent implements OnInit {
   }
 
   addOrg(orgKindId: string) {
+    if (!this.checkOrgEnable(orgKindId)) {
+      return;
+    }
     let parent = this.nzTreeOrg.nzTreeService.getSelectedNodeList()[0].origin.org.id;
     this.orgService.openEvent.emit({ openMode: "new", orgKindId: orgKindId, parentId: parent == undefined ? 0 : parent });
   }
@@ -103,8 +108,24 @@ export class OrganizationComponent implements OnInit {
   }
 
   clickAction(e: NzFormatEmitEvent) : void {
+    e.node.isSelected = true;
+    this.parentEntity = e.node.origin.org;
     this.entity.parent = e.node.origin.org.id;
     this.searchData();
+  }
+
+  checkOrgEnable(orgKingId: string) : boolean {
+    if (this.parentEntity == null) {
+      return orgKingId == "ogn" ? true : false;
+    } else if (this.parentEntity.orgKindId == "ogn") {
+      return true;
+    } else if (this.parentEntity.orgKindId == "dpt") {
+      return orgKingId == "ogn" ? false : true;
+    } else if (this.parentEntity.orgKindId == "pos") {
+      return orgKingId == "psn" ? true : false;
+    } else {
+      return false;
+    }
   }
 
 
