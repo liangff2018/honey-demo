@@ -4,6 +4,7 @@ import { stringify } from 'querystring';
 import { FormBuilder, Validators } from '@angular/forms';
 import { OrganizationService } from '../../../../services/sys/organization.service';
 import { ok } from 'assert';
+import { orgNameRepeat } from '../../../../shared/honey-validators.directive';
 
 @Component({
   selector: 'app-dlg-organization-detail',
@@ -26,7 +27,7 @@ export class DlgOrganizationDetailComponent implements OnInit {
   formModel = this.fb.group({
     parent: [""],//[{value:"", disabled:true}],
     parentName: [""],
-    name: ["", [Validators.required]],
+    name: ["", [Validators.required], [orgNameRepeat(this.orgService)]],
     code: ["", [Validators.required]],
     longName: [""],
     orgKindId: [""],
