@@ -17,6 +17,7 @@ import zh from '@angular/common/locales/zh';
 import { DlgOrganizationDetailComponent } from './components/sys/dialogs/dlg-organization-detail/dlg-organization-detail.component';
 import { DynamicRequiredDirective } from './shared/dynamic-required.directive';
 import { HoneyValidatorsDirective } from './shared/honey-validators.directive';
+import { Portal2Component } from './components/portal2/portal2.component';
 
 registerLocaleData(zh);
 
@@ -29,7 +30,8 @@ registerLocaleData(zh);
     OrganizationComponent,
     DlgOrganizationDetailComponent,
     DynamicRequiredDirective,
-    HoneyValidatorsDirective
+    HoneyValidatorsDirective,
+    Portal2Component
   ],
   imports: [
     BrowserModule,
