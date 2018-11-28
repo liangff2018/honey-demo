@@ -9,11 +9,10 @@ export function orgNameRepeat(orgService: OrganizationService): AsyncValidatorFn
     if (control == null || control.parent == null || !control.value || !control.parent.get("parent").value) {
       return null;
     }
-    
-    return orgService.checkNameRepeat(control.parent.get("parent").value, control.value).pipe(
+    let id: number = control.parent.get("id").value === null ? -1 : control.parent.get("id").value;
+    return orgService.checkNameRepeat(control.parent.get("parent").value, id, control.value).pipe(
       map((flag: boolean) => {
-        console.log("flag----"+flag);
-        return flag ? {name: "名字不允许重复."} : null;
+        return flag ? {repeat: "名字不允许重复."} : null;
       }),
       debounceTime(10)
     );
@@ -28,7 +27,8 @@ export class HoneyValidatorsDirective implements Validator {
   constructor(private orgService: OrganizationService) { }
 
   validate(control: AbstractControl): ValidationErrors {
-    return {name: this.orgService.checkNameRepeat(control.parent.get("parent").value, control.value)};
+    let id: number = control.parent.get("id").value === null ? -1 : control.parent.get("id").value;
+    return {name: this.orgService.checkNameRepeat(control.parent.get("parent").value, id, control.value)};
   }
   
 }

@@ -25,6 +25,7 @@ export class DlgOrganizationDetailComponent implements OnInit {
   levelOptions: Array<{}> = [{id: 1, name: "一级"},{id: 2, name: "二级"}, {id: 3, name: "三级"}];
 
   formModel = this.fb.group({
+    id: [""],
     parent: [""],//[{value:"", disabled:true}],
     parentName: [""],
     name: ["", [Validators.required], [orgNameRepeat(this.orgService)]],
@@ -51,7 +52,7 @@ export class DlgOrganizationDetailComponent implements OnInit {
       if (this.openMode == "new") {
         this.formModel.get("parent").setValue(opts.parentId);
         if (opts.parentId != 0) {
-          this.orgService.findOne(opts.parentId).subscribe(org => this.formModel.get("parentName").setValue(org.name));
+          this.orgService.findOne(opts.parentId).subscribe(org => this.formModel.get("parentName").setValue(org.fullName));
         }
         this.formModel.get("orgKindId").setValue(opts.orgKindId);
         this.formModel.get("orgKindName").setValue(this.orgService.orgKind[opts.orgKindId]);
@@ -66,7 +67,7 @@ export class DlgOrganizationDetailComponent implements OnInit {
           
           if (this.org.parent != 0) {
             this.orgService.findOne(org.parent).subscribe(org => {
-              this.formModel.get("parentName").setValue(org.name);
+              this.formModel.get("parentName").setValue(org.fullName);
             });
           }
         });

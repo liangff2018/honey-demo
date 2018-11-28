@@ -17,7 +17,8 @@
           <nz-form-label [nzSm]="6">名称</nz-form-label>
           <nz-form-control [nzSm]="14">
             <input nz-input formControlName="name" placeholder="name">
-            <nz-form-explain *ngIf="formModel.get('name').dirty && formModel.get('name').errors">请输入名称!</nz-form-explain>
+            <nz-form-explain *ngIf="formModel.get('name').invalid && formModel.get('name').dirty && formModel.get('name').errors.required">请输入名称!</nz-form-explain>
+            <nz-form-explain *ngIf="formModel.get('name').invalid && formModel.get('name').dirty && formModel.get('name').errors.repeat">已存在"{{formModel.get('name').value}}"同级组织!</nz-form-explain>
           </nz-form-control>
         </nz-form-item>
       </div>
